@@ -90,7 +90,7 @@ details>summary::-webkit-details-marker{display:none}
       <button id="tab-review" aria-pressed="false">カードで復習</button>
     </div>
     <div class="row" id="filters">
-      <input id="q" type="search" placeholder="検索（英語・日本語どちらでも）" autocomplete="off">
+      <input id="q" type="search" placeholder="検索（英語・日本語・品詞 例：助動詞）" autocomplete="off">
       <button class="chip" data-f="all" aria-pressed="true">すべて</button>
       <button class="chip" data-f="word" aria-pressed="false">単語</button>
       <button class="chip" data-f="phrase" aria-pressed="false">熟語</button>
@@ -137,7 +137,7 @@ details>summary::-webkit-details-marker{display:none}
       if (filter === "todo" && known[w.id]) return false;
       if (["word","phrase","slang"].includes(filter) && w.type !== filter) return false;
       if (!q) return true;
-      const hay = [w.term, w.meaning, w.nuance, ...(w.synonyms||[]).map(s=>s.term), ...(w.slang||[]).map(s=>s.term)].join(" ").toLowerCase();
+      const hay = [w.term, w.meaning, w.nuance, w.pos, ...(w.tags||[]), ...(w.synonyms||[]).map(s=>s.term), ...(w.slang||[]).map(s=>s.term)].join(" ").toLowerCase();
       return hay.includes(q);
     });
   }
